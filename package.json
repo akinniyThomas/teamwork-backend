@@ -4,7 +4,17 @@
   "description": "Andela DevC Capstone Project",
   "main": "service.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node ./build/service.js",
+    "devstart": "nodemon --exec babel-node backend/service.js",
+    "test": "mocha --require @babel/register backend/test/test.js --exit",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./backend -s",
+    "build": "npm run clean && npm run build-babel",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
+    "heroku-postbuild": "npm install --production"
   },
   "repository": {
     "type": "git",

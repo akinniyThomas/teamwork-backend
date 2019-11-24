@@ -8,19 +8,18 @@ module.exports = (req, res, next) => {
     // eslint-disable-next-line consistent-return
     jwt.verify(token, 'xyzabc129dsei3likjhseskjdssa;lkjda', (error, decoded) => {
       if (error) {
-        return res.json({
+        return res.status(401).json({
           status: 'error',
           error,
         });
       }
       req.decoded = decoded;
-      console.log(decoded);
       next();
     });
   } catch (error) {
     res.status(401).json({
       status: 'error',
-      data: {
+      error: {
         error,
         message: 'invalid request',
       },

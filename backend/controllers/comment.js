@@ -1,95 +1,96 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable radix */
 import pool from '../dbConnectConfig';
 
-export function getComments(req, res, gifOrArti) {
-  let id;
-  if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
-  else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
-  pool.query('SELECT * FROM commenttable where feedid = $1', [id], (error, results) => {
-    if (error) {
-      return res.status(401).json({
-        status: 'error',
-        data: error,
-      });
-    }
-    if (results.rowCount > 0) {
-      res.status(200).json({ status: 'success', data: results.rows });
-    } else {
-      res.status(404).json({ status: 'error', data: 'no rows' });
-    }
-  });
-}
+// export function getComments(req, res, gifOrArti) {
+//   let id;
+//   if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
+//   else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
+//   pool.query('SELECT * FROM commenttable where feedid = $1', [id], (error, results) => {
+//     if (error) {
+//       return res.status(401).json({
+//         status: 'error',
+//         data: error,
+//       });
+//     }
+//     if (results.rowCount > 0) {
+//       res.status(200).json({ status: 'success', data: results.rows });
+//     } else {
+//       res.status(404).json({ status: 'error', data: 'no rows' });
+//     }
+//   });
+// }
 
-export function getOneComment(req, res, gifOrArti) {
-  let id = 0;
-  if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
-  else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
-  const commentId = parseInt(req.params.commentId);
-  pool.query('SELECT * FROM commenttable where id = $1 and feedid = $2;', [commentId, id], (error, results) => {
-    if (error) {
-      return res.status(401).json({
-        status: 'error',
-        data: error,
-      });
-    }
-    if (results.rowCount > 0) {
-      res.status(200).json({ status: 'success', data: results.rows });
-    } else {
-      res.status(404).json({ status: 'error', data: 'no rows' });
-    }
-  });
-}
+// export function getOneComment(req, res, gifOrArti) {
+//   let id = 0;
+//   if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
+//   else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
+//   const commentId = parseInt(req.params.commentId);
+//   pool.query('SELECT * FROM commenttable where id = $1 and feedid = $2;', [commentId, id], (error, results) => {
+//     if (error) {
+//       return res.status(401).json({
+//         status: 'error',
+//         data: error,
+//       });
+//     }
+//     if (results.rowCount > 0) {
+//       res.status(200).json({ status: 'success', data: results.rows });
+//     } else {
+//       res.status(404).json({ status: 'error', data: 'no rows' });
+//     }
+//   });
+// }
 
-export function editComment(req, res, gifOrArti) {
-  let id = 0;
-  if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
-  else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
-  const commentId = parseInt(req.params.commentId);
-  const {
-    coment, inappropflag,
-  } = req.body;
-  pool.query('update commenttable set coment = $1, inappropFlag = $2 where id = $3 and feedid = $4;', [coment, inappropflag, commentId, id], (error, result) => {
-    if (error) {
-      return res.status(401).json({
-        status: 'error',
-        data: error,
-      });
-    }
-    if (result.rowCount > 0) {
-      res.status(200).json({
-        status: 'success',
-        data: 'updated',
-      });
-    } else {
-      res.status(404).json({ status: 'error', data: 'no rows' });
-    }
-  });
-}
+// export function editComment(req, res, gifOrArti) {
+//   let id = 0;
+//   if (gifOrArti === 'gif') id = parseInt(req.params.gifId);
+//   else if (gifOrArti === 'article') id = parseInt(req.params.articleId);
+//   const commentId = parseInt(req.params.commentId);
+//   const {
+//     coment, inappropflag,
+//   } = req.body;
+//   pool.query('update commenttable set coment = $1, inappropFlag = $2 where id = $3 and feedid = $4;', [coment, inappropflag, commentId, id], (error, result) => {
+//     if (error) {
+//       return res.status(401).json({
+//         status: 'error',
+//         data: error,
+//       });
+//     }
+//     if (result.rowCount > 0) {
+//       res.status(200).json({
+//         status: 'success',
+//         data: 'updated',
+//       });
+//     } else {
+//       res.status(404).json({ status: 'error', data: 'no rows' });
+//     }
+//   });
+// }
 
-export function deleteComment(req, res) {
-  const commentId = parseInt(req.params.commentId);
-  pool.query('delete from commenttable where id = $1;', [commentId], (error, result) => {
-    if (error) {
-      return res.status(401).json({
-        status: 'error',
-        data: error,
-        // result,
-      });
-    }
-    if (result.rowCount === 1) {
-      res.status(200).json({
-        status: 'success',
-        data: 'deleted',
-        // result,
-      });
-    } else {
-      res.status(404).json({ status: 'error', data: 'no rows' });
-    }
-  });
-}
+// export function deleteComment(req, res) {
+//   const commentId = parseInt(req.params.commentId);
+//   pool.query('delete from commenttable where id = $1;', [commentId], (error, result) => {
+//     if (error) {
+//       return res.status(401).json({
+//         status: 'error',
+//         data: error,
+//         // result,
+//       });
+//     }
+//     if (result.rowCount === 1) {
+//       res.status(200).json({
+//         status: 'success',
+//         data: 'deleted',
+//         // result,
+//       });
+//     } else {
+//       res.status(404).json({ status: 'error', data: 'no rows' });
+//     }
+//   });
+// }
 
-export function createComment(req, res, gifOrArti) {
+const createComment = (req, res, gifOrArti) => {
   let feedids;
   if (gifOrArti === 'gif') feedids = parseInt(req.params.gifId);
   else if (gifOrArti === 'article') feedids = parseInt(req.params.articleId);
@@ -147,4 +148,6 @@ export function createComment(req, res, gifOrArti) {
       res.status(404).json({ status: 'error', data: 'no rows', resultants: result });
     }
   });
-}
+};
+
+module.exports = createComment;

@@ -1,6 +1,6 @@
 /* eslint-disable radix */
 /* eslint-disable consistent-return */
-// import { uploads } from '../middlewares/cloudinaryConfig';
+import { uploads } from '../middlewares/cloudinaryConfig';
 import {
   getComments, getOneComment, editComment, createComment,
 } from './comment';
@@ -10,11 +10,57 @@ import {
 
 
 export function createGif(req, res) {
-  createQuerries(req, res, 'giftable', 'file.url');
+  try {
+    uploads(req.files[0].path)
+      .then((file) => {
+        createQuerries(req, res, 'giftable', file.url);
+      }).catch((error) => {
+        if (error) {
+          res.status(500).json({
+            status: 'error',
+            error: {
+              message: 'encountered some issues',
+              error,
+            },
+          });
+        }
+      });
+  } catch (anError) {
+    res.status(500).json({
+      status: 'error',
+      error: {
+        message: 'issues with file',
+        anError,
+      },
+    });
+  }
 }
 
 export function editGif(req, res) {
-  editQuerries(req, res, 'giftable', 'file.url');
+  try {
+    uploads(req.files[0].path)
+      .then((file) => {
+        editQuerries(req, res, 'giftable', file.url);
+      }).catch((error) => {
+        if (error) {
+          res.status(500).json({
+            status: 'error',
+            error: {
+              message: 'encountered some issues',
+              error,
+            },
+          });
+        }
+      });
+  } catch (anError) {
+    res.status(500).json({
+      status: 'error',
+      error: {
+        message: 'issues with file',
+        anError,
+      },
+    });
+  }
 }
 
 export function getGifs(req, res) {

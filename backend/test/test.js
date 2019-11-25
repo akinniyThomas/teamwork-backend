@@ -8,6 +8,10 @@ process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
 chai.should();
 
+// loginAllWays = () => {
+
+// }
+
 describe('Users', () => {
   describe('POST /api/v1/auth', () => {
     it('should login a user', (done) => {
@@ -237,3 +241,76 @@ describe('Articles', () => {
 //     });
 //   });
 });
+
+describe('Gifs', () => {
+    describe('GET /api/v1/gifs', () => {
+      it('should get all gifs', (done) => {
+        chai.request(app)
+          .get('/api/v1/gifs')
+          .end((er, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql('error');
+            done();
+          });
+      });
+      it('should get one gif', (done) => {
+        const id = 1;
+        chai.request(app)
+          .get(`/api/v1/gifs/${id}`)
+          .end((er, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql('error');
+            done();
+          });
+      });
+    });
+    describe('PUT /api/v1/gifs', () => {
+      it('should update an gif', (done) => {
+        const id = 2;
+        chai.request(app)
+          .patch(`/api/v1/gifs/${id}`)
+          .send({
+            title: 'new title',
+            feed: 'http://cloudinary.com/something.somet.com',
+            tagid: 1,
+            inappropflag: false,
+          })
+          .end((er, res) => {
+            // res.should.have.status(401);
+            res.body.should.have.property('status').eql('error');
+            done();
+          });
+      });
+    });
+    describe('POST /api/v1/gifs', () => {
+      it('should create an gif', (done) => {
+        chai.request(app)
+          .post('/api/v1/gifs/')
+          .send({
+            title: 'new title',
+            feed: 'the link to the page is saved here',
+            authorid: 1,
+            tagid: 1,
+            inappropflag: false,
+          })
+          .end((er, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql('error');
+            done();
+          });
+      });
+    });
+    describe('DELETE /api/v1/gifs', () => {
+      it('should delete an gif', (done) => {
+        const id = 1;
+        chai.request(app)
+          .delete(`/api/v1/gifs/${id}`)
+          .end((er, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql('error');
+            done();
+          });
+      });
+    });
+  });
+  

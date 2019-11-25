@@ -577,12 +577,35 @@ describe('With Authentication', () => {
         const id = 2;
         chai.request(app)
           .delete(`/api/v1/gifs/${id}`)
+          .set('Authorization', token)
           .end((er, res) => {
             res.should.have.status(200);
             res.body.should.have.property('status').eql('success');
             done();
           });
       });
+    });
+  });
+
+  describe('POST Article Again /api/v1/articles', () => {
+    it('should create an article', (done) => {
+      chai.request(app)
+        .post('/api/v1/articles/')
+        .set('Authorization', token)
+        .send({
+          title: 'a brand new title',
+          feed: 'another beautiful article is here',
+          createdon: '2019-10-31T23:00:00.000Z',
+          authorid: 1,
+          tagid: 1,
+          inappropflag: false,
+        })
+        .end((er, res) => {
+          res.should.have.status(201);
+          res.body.should.have.property('status').eql('success');
+          // res.body.data.should.have.property('message').eql('feed successfully posted');
+          done();
+        });
     });
   });
 

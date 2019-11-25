@@ -157,160 +157,105 @@ describe('Articles', () => {
         });
     });
   });
-  // comments of articles
-//   describe('GET /api/v1/articles/comments', () => {
-//     it('should get all comments for an article', (done) => {
-//       const id = 1;
-//       chai.request(app)
-//         .get(`/api/v1/articles/${id}/comments`)
-//         .end((er, res) => {
-//           res.should.have.status(401);
-//           res.body.should.have.property('status').eql('error');
-//           res.body.should.have.property('data');
-//           // res.body.data[0].should.have.property('comment');
-//           // res.body.data[0].should.have.property('commenttype');
-//           // res.body.data[0].should.have.property('inappropflag');
-//           done();
-//         });
-//     });
-//     it('should get one comment for a particular article', (done) => {
-//       const id = 1;
-//       const commentId = 1;
-//       chai.request(app)
-//         .get(`/api/v1/articles/${id}/comments/${commentId}`)
-//         .end((er, res) => {
-//           res.should.have.status(401);
-//           res.body.should.have.property('status').eql('error');
-//           res.body.should.have.property('data');
-//           // res.body.data[0].should.have.property('article');
-//           // res.body.data[0].should.have.property('title');
-//           // res.body.data[0].should.have.property('inappropflag');
-//           done();
-//         });
-//     });
-//   });
-//   describe('PUT /api/v1/articles/comments', () => {
-//     it('should update an articles comment', (done) => {
-//       const id = 8;
-//       const commentId = 1;
-//       chai.request(app)
-//         .patch(`/api/v1/articles/${id}/comments/${commentId}`)
-//         .send({
-//           feedtype: 'article',
-//           coment: 'a former comment i am now corecting as i made a mistake article is here',
-//           inappropflag: false,
-//         })
-//         .end((er, res) => {
-//           res.should.have.status(401);
-//           res.body.should.have.property('status').eql('error');
-//           // res.body.should.have.property('data').eql('no rows');
-//           done();
-//         });
-//     });
-//   });
-//   describe('POST /api/v1/articles/comments', () => {
-//     it('should create a comment for an article', (done) => {
-//       const id = 13;
-//       chai.request(app)
-//         .post(`/api/v1/articles/${id}/comment`)
-//         .send({
-//           coment: 'this is just wow beautiful article is here',
-//           inappropflag: false,
-//           authorid: 2,
-//         })
-//         .end((er, res) => {
-//           res.should.have.status(401);
-//           res.body.should.have.property('status').eql('error');
-//           // res.body.should.have.property('data').eql('created');
-//           done();
-//         });
-//     });
-//   });
-//   describe('DELETE /api/v1/articles/comments', () => {
-//     it('should delete a comment from an article', (done) => {
-//       const id = 29;
-//       const commentId = 8;
-//       chai.request(app)
-//         .delete(`/api/v1/articles/${id}/comments/${commentId}`)
-//         .end((er, res) => {
-//           res.should.have.status(401);
-//           res.body.should.have.property('status').eql('error');
-//           // res.body.should.have.property('data').eql('no rows');
-//           done();
-//         });
-//     });
-//   });
 });
 
 describe('Gifs', () => {
-    describe('GET /api/v1/gifs', () => {
-      it('should get all gifs', (done) => {
-        chai.request(app)
-          .get('/api/v1/gifs')
-          .end((er, res) => {
-            res.should.have.status(401);
-            res.body.should.have.property('status').eql('error');
-            done();
-          });
-      });
-      it('should get one gif', (done) => {
-        const id = 1;
-        chai.request(app)
-          .get(`/api/v1/gifs/${id}`)
-          .end((er, res) => {
-            res.should.have.status(401);
-            res.body.should.have.property('status').eql('error');
-            done();
-          });
-      });
+  describe('GET /api/v1/gifs', () => {
+    it('should get all gifs', (done) => {
+      chai.request(app)
+        .get('/api/v1/gifs')
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
     });
-    describe('PUT /api/v1/gifs', () => {
-      it('should update an gif', (done) => {
-        const id = 2;
-        chai.request(app)
-          .patch(`/api/v1/gifs/${id}`)
-          .send({
-            title: 'new title',
-            feed: 'http://cloudinary.com/something.somet.com',
-            tagid: 1,
-            inappropflag: false,
-          })
-          .end((er, res) => {
-            // res.should.have.status(401);
-            res.body.should.have.property('status').eql('error');
-            done();
-          });
-      });
-    });
-    describe('POST /api/v1/gifs', () => {
-      it('should create an gif', (done) => {
-        chai.request(app)
-          .post('/api/v1/gifs/')
-          .send({
-            title: 'new title',
-            feed: 'the link to the page is saved here',
-            authorid: 1,
-            tagid: 1,
-            inappropflag: false,
-          })
-          .end((er, res) => {
-            res.should.have.status(401);
-            res.body.should.have.property('status').eql('error');
-            done();
-          });
-      });
-    });
-    describe('DELETE /api/v1/gifs', () => {
-      it('should delete an gif', (done) => {
-        const id = 1;
-        chai.request(app)
-          .delete(`/api/v1/gifs/${id}`)
-          .end((er, res) => {
-            res.should.have.status(401);
-            res.body.should.have.property('status').eql('error');
-            done();
-          });
-      });
+    it('should get one gif', (done) => {
+      const id = 1;
+      chai.request(app)
+        .get(`/api/v1/gifs/${id}`)
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
     });
   });
-  
+  describe('PUT /api/v1/gifs', () => {
+    it('should update an gif', (done) => {
+      const id = 2;
+      chai.request(app)
+        .patch(`/api/v1/gifs/${id}`)
+        .send({
+          title: 'new title',
+          feed: 'http://cloudinary.com/something.somet.com',
+          tagid: 1,
+          inappropflag: false,
+        })
+        .end((er, res) => {
+          // res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+  describe('POST /api/v1/gifs', () => {
+    it('should create an gif', (done) => {
+      chai.request(app)
+        .post('/api/v1/gifs/')
+        .send({
+          title: 'new title',
+          feed: 'the link to the page is saved here',
+          authorid: 1,
+          tagid: 1,
+          inappropflag: false,
+        })
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+  describe('DELETE /api/v1/gifs', () => {
+    it('should delete an gif', (done) => {
+      const id = 1;
+      chai.request(app)
+        .delete(`/api/v1/gifs/${id}`)
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+});
+
+describe('Feed', () => {
+  describe('GET /feed', () => {
+    it('should get latest articles or gifs', (done) => {
+      chai.request(app)
+        .get('/api/v1/feed')
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+});
+
+describe('Tags', () => {
+  describe('GET /feed', () => {
+    const id = 1;
+    it('should get latest articles by tag', (done) => {
+      chai.request(app)
+        .get(`/api/v1/articles/tag/${id}`)
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+});

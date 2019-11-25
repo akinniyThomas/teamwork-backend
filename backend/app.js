@@ -3,7 +3,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import artRoute from './routes/article';
 // import gifRoute from './routes/gif';
-// import useRoute from './routes/user';
+import useRoute from './routes/user';
 // import feedRoute from './routes/feed';
 // import { getTags } from './controllers/feed';
 // import auth from './middlewares/auth';
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/articles', artRoute);
 // app.use('/api/v1/gifs', gifRoute);
-// app.use('/api/v1/auth', useRoute);
+app.use('/api/v1/auth', useRoute);
 // app.use('/api/v1/feed', feedRoute);
 
 // app.get('/api/v1/tags', auth, getTags);

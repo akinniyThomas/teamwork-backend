@@ -8,6 +8,68 @@ process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
 chai.should();
 
+describe('Users', () => {
+  describe('POST /api/v1/auth', () => {
+    it('should login a user', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+          email: 'superuser@teamwork.com',
+          password: 'password123%',
+        })
+        .end((er, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property('status').eql('success');
+          res.body.data.should.have.property('token');
+          res.body.data.should.have.property('userId').eql(1);
+          done();
+        });
+    });
+    it('should create an user', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/create-user')
+        .send({
+          firstname: '1Abigail2',
+          lastname: '1Akinniyi2',
+          email: '1abiniyi21@email.com',
+          password: 'password123%',
+          gender: 'female',
+          jobrole: 'Managing Director',
+          address: 'Oyo Road, oyo state',
+          staffnumber: 'sn0000001',
+          employmentdate: '12-12-2012',
+          administrator: false,
+        })
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+  });
+  describe('GET /api/v1/auth', () => {
+    it('should get all users', (done) => {
+      chai.request(app)
+        .get('/api/v1/auth/users')
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+    it('should get one user', (done) => {
+      const id = 1;
+      chai.request(app)
+        .get(`/api/v1/auth/users/${id}`)
+        .end((er, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('status').eql('error');
+          done();
+        });
+    });
+  });
+});
 
 describe('Articles', () => {
   describe('GET /api/v1/articles', () => {

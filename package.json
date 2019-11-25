@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node ./build/service.js",
     "devstart": "nodemon --exec babel-node backend/service.js",
-    "test": "mocha --require @babel/register backend/test/test.js --exit",
+    "test": "mocha --require @babel/register backend/test/test.js --timeout 30000 --exit",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./backend -s",
     "build": "npm run clean && npm run build-babel",

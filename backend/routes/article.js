@@ -1,11 +1,11 @@
 import exp from 'express';
 import {
   createArticle, getArticles, getOneArticle, deleteArticle, editArticle, getArticlesByTag,
-  getCommentsForArticle, editCommentForArticle, getOneCommentForArticle, createCommentForArticle,
+  createCommentForArticle,
 } from '../controllers/article';
-import {
-  deleteComment,
-} from '../controllers/comment';
+// import {
+//   deleteComment,
+// } from '../controllers/comment';
 import auth from '../middlewares/auth';
 // import auth from '../middlewares/auth';
 
@@ -24,10 +24,10 @@ myRouter.get('/', auth, getArticles);
 myRouter.delete('/:articleId', auth, deleteArticle);
 // specified api endpoint | POST /articles/<:articleId>/comment -- working
 myRouter.post('/:articleId/comment', auth, createCommentForArticle);
-myRouter.patch('/:articleId/comments/:commentId', auth, editCommentForArticle);
-myRouter.get('/:articleId/comments/:commentId', auth, getOneCommentForArticle);
-myRouter.get('/:articleId/comments', auth, getCommentsForArticle);
-myRouter.delete('/:articleId/comments/:commentId', auth, deleteComment);
+// myRouter.patch('/:articleId/comments/:commentId', auth, editCommentForArticle);
+// myRouter.get('/:articleId/comments/:commentId', auth, getOneCommentForArticle);
+// myRouter.get('/:articleId/comments', auth, getCommentsForArticle);
+// myRouter.delete('/:articleId/comments/:commentId', auth, deleteComment);
 
 myRouter.get('/tag/:tagId', auth, getArticlesByTag);
 

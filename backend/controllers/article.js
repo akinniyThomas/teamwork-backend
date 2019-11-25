@@ -1,8 +1,10 @@
 /* eslint-disable consistent-return */
 /* eslint-disable radix */
-import {
-  getComments, getOneComment, editComment, createComment,
-} from './comment';
+// import {
+//   getComments, getOneComment, editComment,
+//   createComment,
+// } from './comment';
+import createComment from './comment';
 import {
   getAllQuerries, getOneQuerries, deleteQuerries, editQuerries, createQuerries, getByTag,
 } from '../helpers/dbQuerries';
@@ -27,17 +29,17 @@ export function deleteArticle(req, res) {
   deleteQuerries(req, res, 'articletable');
 }
 
-export function getCommentsForArticle(req, res) {
-  getComments(req, res, 'article');
-}
+// export function getCommentsForArticle(req, res) {
+//   getComments(req, res, 'article');
+// }
 
-export function getOneCommentForArticle(req, res) {
-  getOneComment(req, res, 'article');
-}
+// export function getOneCommentForArticle(req, res) {
+//   getOneComment(req, res, 'article');
+// }
 
-export function editCommentForArticle(req, res) {
-  editComment(req, res, 'article');
-}
+// export function editCommentForArticle(req, res) {
+//   editComment(req, res, 'article');
+// }
 
 export function createCommentForArticle(req, res) {
   createComment(req, res, 'article');

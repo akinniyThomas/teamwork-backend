@@ -79,7 +79,6 @@ export function editQuerries(req, res, tableName, file) {
   const { inappropflag, title } = req.body;
   pool.query('update feedtable set title = $1, feed = $2, inappropFlag = $3 where id = $4;', [title, feed, inappropflag, id], (error, result) => {
     if (error) {
-      console.log(error);
       return res.status(400).json({
         status: 'error',
         error: {
@@ -198,7 +197,7 @@ export function getOneQuerries(req, res, tableName) {
           sid, feed, title, createdon,
           authorfirstname, authorlastname, category, feedtype, authorid,
         } = results.rows[0];
-        const searchquerry = 'SELECT c.id AS comentid, c.coment, c.createdon, c.inappropflag, c.authorid, u.firstname, u.lastname, u.staffnumber FROM commenttable AS c, usertable AS u WHERE c.authorid = u.id AND c.feedid = $1;';
+        const searchquerry = 'SELECT c.id AS comentid, c.coment, c.createdon, c.inappropflag, c.authorid, u.firstname, u.lastname, u.staffnumber FROM commenttable AS c, usertable AS u WHERE c.authorid = u.id AND c.feedid = $1 ORDER BY c.id DESC;';
         pool.query(searchquerry, [id], (inerror, inresult) => {
           if (inerror) {
             return res.status(400).json({

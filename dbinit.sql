@@ -64,6 +64,3 @@ VALUES
     INSERT INTO tagtable (tagname) VALUES('Work');
     INSERT INTO tagtable (tagname) VALUES('Family');
     INSERT INTO tagtable (tagname) VALUES('Casual');
-    -- INSERT INTO feedtable (title, feed, createdon, authorid, tagid, inappropflag, feedtype) VALUES('a new title', 'the article is a good piece of my mind', CURRENT_TIMESTAMP, 1, 1, FALSE, 'art');
-    -- INSERT INTO feedtable (title, feed, createdon, authorid, tagid, inappropflag, feedtype) VALUES('so glad', 'www.cloudinary.com/thepictureishere.jpg', CURRENT_TIMESTAMP, 1, 1, FALSE, 'gif');
-    -- INSERT INTO commenttable (coment, feedid, createdon, inappropflag, authorid) VALUES('the article is truly as you said', 1, CURRENT_TIMESTAMP, FALSE, 1);

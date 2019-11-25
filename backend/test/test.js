@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../service';
 import fs from 'fs';
+import app from '../service';
 
 process.env.NODE_ENV = 'test';
 
@@ -300,24 +300,24 @@ describe('No Authentication', () => {
 describe('With Authentication', () => {
   describe('Users', () => {
     describe('POST /api/v1/auth', () => {
-        it('should login user', (done) => {      
+      it('should login user', (done) => {
         chai.request(app)
-        .post('/api/v1/auth/signin')
-        .send({
-        email: 'superuser@teamwork.com',
-        // email: 'super2user@com.com',
-        password: 'password123%',
-        })
-        .end((er, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property('status').eql('success');
-        res.body.data.should.have.property('token');
-        
-        token = res.body.data.token;
-        token = `Bearer ${token}`;
-        done();
-        });
-    });
+          .post('/api/v1/auth/signin')
+          .send({
+            email: 'superuser@teamwork.com',
+            // email: 'super2user@com.com',
+            password: 'password123%',
+          })
+          .end((er, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property('status').eql('success');
+            res.body.data.should.have.property('token');
+
+            token = res.body.data.token;
+            token = `Bearer ${token}`;
+            done();
+          });
+      });
       it('should create an user', (done) => {
         //   console.log(`token is ${token}`);
         chai.request(app)
@@ -479,7 +479,7 @@ describe('With Authentication', () => {
     describe('POST /api/v1/gifs', () => {
       it('should create an gif', (done) => {
         //   done();
-          chai.request(app)
+        chai.request(app)
           .post('/api/v1/gifs/')
           .set('Authorization', token)
           .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -496,7 +496,7 @@ describe('With Authentication', () => {
           .field('inappropflag', false)
           .attach('file', fs.readFileSync('files/images/Capture.PNG'), 'Capture.PNG')
           .end((er, res) => {
-              console.log('here');
+            console.log('here');
             res.should.have.status(201);
             res.body.should.have.property('status').eql('success');
             done();

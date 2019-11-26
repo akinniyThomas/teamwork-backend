@@ -1,6 +1,7 @@
 import exp from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import artRoute from './routes/article';
 import gifRoute from './routes/gif';
 import useRoute from './routes/user';
@@ -14,7 +15,7 @@ const app = exp();
 app.use(exp.static(path.join(__dirname, 'public')));
 // app.use('/uploads', exp.static('uploads'));
 app.use(bodyParser.json());
-
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

@@ -13,6 +13,7 @@ chai.should();
 let token;
 let articleId;
 let gifId;
+// let userId;
 
 describe('No Authentication', () => {
   describe('Users', () => {
@@ -318,14 +319,20 @@ describe('With Authentication', () => {
 
             token = res.body.data.token;
             token = `Bearer ${token}`;
+            // userId = res.body.data.userId;
             done();
           });
       });
       it('should delete user', (done) => {
+        const id = 2;
         chai.request(app)
-          .delete('api/v1/auth/users/2')
-          .set('Authorization', token);
-        done();
+          .delete(`/api/v1/auth/users/${id}`)
+          .set('Authorization', token)
+          .end((er, res) => {
+            // res.should.have.status(200);
+            res.body.should.have.property('status');
+            done();
+          });
       });
       it('should create an user', (done) => {
         //   console.log(`token is ${token}`);

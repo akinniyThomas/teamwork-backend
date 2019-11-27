@@ -307,8 +307,8 @@ describe('With Authentication', () => {
         chai.request(app)
           .post('/api/v1/auth/signin')
           .send({
-            // email: 'superuser@teamwork.com',
-            email: 'super2user@com.com',
+            email: 'superuser@teamwork.com',
+            // email: 'super2user@com.com',
             password: 'password123%',
           })
           .end((er, res) => {

@@ -3,7 +3,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import pool from '../dbConnectConfig';
-import { getAllQuerries, getOneQuerries } from '../helpers/dbQuerries';
+import { getAllQuerries, getOneQuerries, deleteQuerries } from '../helpers/dbQuerries';
 
 export function signup(req, res) {
   bcrypt.hash(req.body.password, 10)
@@ -97,4 +97,8 @@ export function getAllUsers(req, res) {
 
 export function getOneUser(req, res) {
   getOneQuerries(req, res, 'usertable');
+}
+
+export function deleteUser(req, res) {
+  deleteQuerries(req, res, 'usertable');
 }

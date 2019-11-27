@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -10,6 +11,9 @@ chai.use(chaiHttp);
 chai.should();
 
 let token;
+let articleId;
+let gifId;
+// let userId;
 
 describe('No Authentication', () => {
   describe('Users', () => {
@@ -315,6 +319,18 @@ describe('With Authentication', () => {
 
             token = res.body.data.token;
             token = `Bearer ${token}`;
+            // userId = res.body.data.userId;
+            done();
+          });
+      });
+      it('should delete user', (done) => {
+        const id = 2;
+        chai.request(app)
+          .delete(`/api/v1/auth/users/${id}`)
+          .set('Authorization', token)
+          .end((er, res) => {
+            // res.should.have.status(200);
+            res.body.should.have.property('status');
             done();
           });
       });
@@ -384,6 +400,7 @@ describe('With Authentication', () => {
           .end((er, res) => {
             res.should.have.status(201);
             res.body.should.have.property('status').eql('success');
+            articleId = res.body.data.feedid;
             // res.body.data.should.have.property('message').eql('feed successfully posted');
             done();
           });
@@ -391,14 +408,14 @@ describe('With Authentication', () => {
     });
     describe('POST /api/v1/articles/comments', () => {
       it('should create a comment for an article', (done) => {
-        const id = 1;
+        const id = parseInt(articleId);
         chai.request(app)
           .post(`/api/v1/articles/${id}/comment`)
           .set('Authorization', token)
           .send({
             coment: 'this is just wow beautiful article is here',
             inappropflag: false,
-            authorid: 2,
+            authorid: 1,
           })
           .end((er, res) => {
             res.should.have.status(201);
@@ -424,7 +441,7 @@ describe('With Authentication', () => {
           });
       });
       it('should get one article', (done) => {
-        const id = 1;
+        const id = parseInt(articleId);
         chai.request(app)
           .get(`/api/v1/articles/${id}`)
           .set('Authorization', token)
@@ -441,7 +458,7 @@ describe('With Authentication', () => {
     });
     describe('PUT /api/v1/articles', () => {
       it('should update an article', (done) => {
-        const id = 1;
+        const id = parseInt(articleId);
         chai.request(app)
           .patch(`/api/v1/articles/${id}`)
           .set('Authorization', token)
@@ -461,7 +478,7 @@ describe('With Authentication', () => {
     });
     describe('DELETE /api/v1/articles', () => {
       it('should delete an article', (done) => {
-        const id = 1;
+        const id = parseInt(articleId);
         chai.request(app)
           .delete(`/api/v1/articles/${id}`)
           .set('Authorization', token)
@@ -499,20 +516,21 @@ describe('With Authentication', () => {
             console.log('here');
             res.should.have.status(201);
             res.body.should.have.property('status').eql('success');
+            gifId = res.body.data.feedid;
             done();
           });
       });
     });
     describe('POST /api/v1/gifs/comments', () => {
       it('should create a comment for a gif', (done) => {
-        const id = 2;
+        const id = parseInt(gifId);
         chai.request(app)
           .post(`/api/v1/gifs/${id}/comment`)
           .set('Authorization', token)
           .send({
             coment: 'this is just wow beautiful gif is here',
             inappropflag: false,
-            authorid: 2,
+            authorid: 1,
           })
           .end((er, res) => {
             res.should.have.status(201);
@@ -534,7 +552,7 @@ describe('With Authentication', () => {
           });
       });
       it('should get one gif', (done) => {
-        const id = 2;
+        const id = parseInt(gifId);
         chai.request(app)
           .get(`/api/v1/gifs/${id}`)
           .set('Authorization', token)
@@ -574,7 +592,7 @@ describe('With Authentication', () => {
     // });
     describe('DELETE /api/v1/gifs', () => {
       it('should delete an gif', (done) => {
-        const id = 2;
+        const id = parseInt(gifId);
         chai.request(app)
           .delete(`/api/v1/gifs/${id}`)
           .set('Authorization', token)

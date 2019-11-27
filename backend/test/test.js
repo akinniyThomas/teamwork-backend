@@ -415,7 +415,7 @@ describe('With Authentication', () => {
           .send({
             coment: 'this is just wow beautiful article is here',
             inappropflag: false,
-            authorid: 2,
+            authorid: 1,
           })
           .end((er, res) => {
             res.should.have.status(201);
@@ -530,7 +530,7 @@ describe('With Authentication', () => {
           .send({
             coment: 'this is just wow beautiful gif is here',
             inappropflag: false,
-            authorid: 2,
+            authorid: 1,
           })
           .end((er, res) => {
             res.should.have.status(201);
